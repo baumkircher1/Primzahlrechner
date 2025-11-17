@@ -47,26 +47,19 @@ if (isset($_POST['berechne_prim'])) {
 </form>
 
 <?php
-// Prüfen ob Button geklickt wurde
-if (isset($_POST['berechne_log'])) {
-    echo "<pre>";
-
-    // Für jede Zahl von 1 bis 100
-    for ($n = 1; $n <= 100; $n++) {
-        // Logarithmus berechnen
-        $log = log($n);
-
-        // Anzahl Sterne = gerundeter Log-Wert
-        $anzahlSterne = round($log);
-
-        // Sterne erstellen
-        $sterne = str_repeat('*', $anzahlSterne);
-
-        // Ausgabe: Zahl + Sterne
-        echo "$n:   $sterne\n";
+for ($n = 1; $n <= 100; $n++) {
+    $logwert = log($n);          // natürlicher Logarithmus ln(n)
+    $sterneAnzahl = (int)round($logwert * 10); // Skala: mal 10
+    if ($sterneAnzahl < 1) {
+        $sterneAnzahl = 1;       // damit wenigstens 1 Stern ausgegeben wird
+    }
+    
+    // Sterne ausgeben
+    for ($i = 0; $i < $sterneAnzahl; $i++) {
+        echo "*";
     }
 
-    echo "</pre>";
+    echo "<br>";
 }
 ?>
 </body>
